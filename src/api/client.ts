@@ -18,15 +18,14 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// // Handle 401s globally — log user out
-// api.interceptors.response.use(
-//   (res) => res,
-//   (error) => {
-//     if (error.response?.status === 401) {
-//       localStorage.removeItem('token')
-//       queryClient.clear()
-//       window.location.href = '/login'
-//     }
-//     return Promise.reject(error)
-//   }
-// )
+// Handle 401s globally — log user out
+api.interceptors.response.use(
+  (res) => res,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token')
+      window.location.href = '/login'
+    }
+    return Promise.reject(error)
+  }
+)
